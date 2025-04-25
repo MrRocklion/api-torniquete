@@ -6,16 +6,16 @@ class GpiosManager():
         super().__init__()
         #pines de salidas
         self.cerradura1 = 6
-        self.electroiman = 5
-        self.actuador_up = 21
-        self.actuador_down = 20
-        self.semaforo = 27
-        self.validador = 17
-        self.pulsante_1 = 24
-        self.pin_libre3 = 23
+        self.actuador_up = 26
+        self.actuador_down = 18
+        self.semaforo = 23
+        self.validador = 24
+        self.electroiman = 25
+        self.pulsante_1 = 8
+        self.pin_libre3 = 7
         # pines de entradas
-        self.sensor_45 = 16
-        self.sensor = 26
+        self.sensor_45 = 5
+        self.sensor = 22
 
 
         
