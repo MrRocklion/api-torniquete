@@ -1,0 +1,53 @@
+<html></html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Menu</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+	<div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+		<div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+			<div class="formbg-outer">
+				<div class="formbg">
+					<div class=" padding-horizontal--48">
+						<span class="padding-bottom--15">Configuraciones</span>
+						<form id="stripe-login" method="post">
+				
+						
+						
+							<div class=" padding-bottom--24">
+								<button class="custom-button" type="submit" name="operation" value="ReadSensor" />Leer Sensor</button>
+							</div>
+							<div class=" padding-bottom--24">
+								<button class="custom-button" type="submit" name="operation" value="TestRelay" />Testear Reles</button>
+							</div>
+							
+							<div class=" padding-bottom--24">
+								<button class="custom-button" type="submit" name="operation" value="TestCerradura1" />Cerradura1</button>
+							</div>
+				
+							<div class=" padding-bottom--24">
+								<button class="custom-button" type="submit" name="operation" value="ActuadorOff" />Apagar Actuador</button>
+							</div>
+							<div class=" padding-bottom--24">
+								<button class="custom-button" type="submit" name="operation" value="TestLuzLed" />LuzLed</button>
+							</div>
+				
+							<div class=" padding-bottom--24">
+								<button class="custom-button" type="submit" name="operation" value="generatePass" />Generar Pase</button>
+							</div>
+							
+						</form>
+						{% if result is not none %}
+							<h2>Resultado: {{ result }}</h2>
+						{% endif %}
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
