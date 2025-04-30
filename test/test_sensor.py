@@ -1,4 +1,4 @@
-
+import time
 from gpiosManagerRaspberry import GpiosManager
 try:
     gpios = GpiosManager()

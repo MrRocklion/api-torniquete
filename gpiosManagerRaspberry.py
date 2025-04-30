@@ -28,99 +28,76 @@ import time
 class GpiosManager():
     def __init__(self):
         # Pines de salida
-        self.cerradura = DigitalOutputDevice(6)
-        self.semaforo = DigitalOutputDevice(26)
-        self.actuador_up = DigitalOutputDevice(18)
-        self.actuador_down = DigitalOutputDevice(23)
-        self.electroiman = DigitalOutputDevice(24)
-        self.validador = DigitalOutputDevice(25)
-        self.pin_libre3 = DigitalOutputDevice(8)
+        self.rightLock = DigitalOutputDevice(6)
+        self.leftLock = DigitalOutputDevice(13)
+        self.electromagnet = DigitalOutputDevice(24)
+        self.arrowLight = DigitalOutputDevice(26)
 
         # Pines de entrada
-        self.sensor_45 = DigitalInputDevice(22, pull_up=True)
-        self.sensor = DigitalInputDevice(5, pull_up=True)
-        self.pulsante_1 = DigitalInputDevice(2, pull_up=True)
+        self.sensor = DigitalInputDevice(22, pull_up=True)
         #estado inicial de pines
-        self.cerradura.on()
-        self.electroiman.off()
-        self.actuador_up.on()
-        self.actuador_down.on()
-        self.semaforo.on()
-        self.validador.on()
-        self.pin_libre3.on()
+        self.lock_right.on()
+        self.lock_left.on()
+        self.electroiman.on()
+        self.electromagnet.on()
 
-    def turnstileOpen(self):
-        self.cerradura.off()
+    def test_all_locks(self):
+        self.rightLock.off()
+        self.leftLock.off()
+        time.sleep(1)
+        self.rightLock.on()
+        self.leftLock.on()
+
+
+    def left_lock_open(self):
+        self.leftLock.off()
+        self.arrowLight.off()
+        return "Cerradura Izquierda abierta"
+
+    def left_lock_close(self):
+        self.leftLock.on()
+        self.arrowLight.on()
+        return "Cerradura Izquierda bloqueada"
+    
+    def rigth_lock_open(self):
+        self.rightLock.off()
+        self.arrowLight.off()
+        return "Cerradura Derecha abierta"
+
+    def rigth_lock_close(self):
+        self.rightLock.on()
+        self.arrowLight.on()
+        return "Cerradura Derecha bloqueada"
+
+    def test_right_lock(self):
+        self.rightLock.off()
+        time.sleep(1)
+        self.rightLock.on()
+        return 'Cerradura Derecha testeada con exito'
+    
+    def test_left_lock(self):
+        self.rightLock.off()
+        time.sleep(1)
+        self.rightLock.on()
+        return 'Cerradura Derecha testeada con exito'
+
+    def test_arrow(self):
         self.semaforo.off()
-        return "puerta general abierta"
-
-    def turnstileBlock(self):
-        self.cerradura.on()
-        self.semaforo.on()
-        return "puerta general bloqueada"
-
-    def testLock(self):
-        self.cerradura.off()
-        time.sleep(1)
-        self.cerradura.on()
-        time.sleep(1)
-        return 'Cerradura 1 testeada con exito'
-
-    def testArrow(self):
-        self.semaforo.off()
         time.sleep(1)
         self.semaforo.on()
-        time.sleep(2)
         return 'Luz Led testeada con exito'
 
-    def specialDoorOpen(self):
-        self.actuador_down.on()
-        self.actuador_up.off()
-        self.semaforo.off()
+    def special_door_open(self):
+        self.electromagnet.off()
+        self.arrowLight.off()
         return "Puerta especial Abierta"
 
-    def specialDoorClose(self):
-        self.actuador_up.on()
-        self.actuador_down.off()
-        self.semaforo.on()
+    def special_door_close(self):
+        self.electromagnet.on()
+        self.arrowLight.on()
         return "Puerta Especial Cerrada"
-
-    def specialDoorOff(self):
-        self.actuador_up.on()
-        self.actuador_down.on()
-        self.semaforo.on()
-        return "sistema silla de ruedas apagado"
-
-    def rebootButton(self):
-        return self.pulsante_1.value == 0
-
-    def ReadSensor(self):
+    
+    def read_sensor(self):
         return self.sensor.value == 0
 
-    def ReadSensor45(self):
-        return self.sensor_45.value == 0
 
-    def validador_on(self):
-        self.validador.off()
-        return True
-
-    def validador_off(self):
-        self.validador.on()
-        return True
-
-    def restart_validator(self):
-        self.validador.on()
-        time.sleep(1)
-        self.validador.off()
-        time.sleep(4)
-        return True
-
-    def doorOpen(self):
-        self.electroiman.on()
-        self.semaforo.off()
-        return "puerta general abierta"
-
-    def doorClose(self):
-        self.electroiman.off()
-        self.semaforo.on()
-        return "puerta general cerrada"

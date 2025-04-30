@@ -39,7 +39,6 @@ class GpiosManager():
         # Pines de entrada
         self.sensor_45 = DigitalInputDevice(22, pull_up=True)
         self.sensor = DigitalInputDevice(5, pull_up=True)
-        self.pulsante_1 = DigitalInputDevice(2, pull_up=True)
         #estado inicial de pines
         self.cerradura.on()
         self.electroiman.off()
@@ -95,9 +94,11 @@ class GpiosManager():
         return self.pulsante_1.value == 0
 
     def ReadSensor(self):
+        print("Sensor 1:", self.sensor.value)
         return self.sensor.value == 0
 
     def ReadSensor45(self):
+        print("Sensor 2:", self.sensor.value)
         return self.sensor_45.value == 0
 
     def validador_on(self):
