@@ -29,17 +29,18 @@ class GpiosManager():
     def __init__(self):
         # Pines de salida
         self.rightLock = DigitalOutputDevice(6)
-        self.leftLock = DigitalOutputDevice(13)
-        self.electromagnet = DigitalOutputDevice(24)
-        self.arrowLight = DigitalOutputDevice(26)
+        self.leftLock = DigitalOutputDevice(26)
+        self.electromagnet = DigitalOutputDevice(18)
+        self.arrowLight = DigitalOutputDevice(23)
 
         # Pines de entrada
         self.sensor = DigitalInputDevice(22, pull_up=True)
+        self.pulsante = DigitalInputDevice(2,pull_up=True)
         #estado inicial de pines
-        self.lock_right.on()
-        self.lock_left.on()
-        self.electroiman.on()
+        self.rightLock.on()
+        self.leftLock.on()
         self.electromagnet.on()
+        self.arrowLight.on()
 
     def test_all_locks(self):
         self.rightLock.off()

@@ -14,6 +14,7 @@ try:
         if ser.in_waiting > 0:
             data = ser.readline().decode("utf-8", errors="ignore").strip()
             #linea = self.ser.readline().decode().strip() 
+            print(data)
             if data:
                 print(f"📨 Recibido: {data}")
         time.sleep(0.05)  # Pequeña pausa para no sobrecargar el CPU

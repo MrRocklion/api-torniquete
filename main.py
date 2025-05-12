@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, abort,render_template
 import threading
 from rs232 import rs232Comunication
-from MecanismLogic import Manager
+from MecanismLogic import TurnstileManager
 from database.SqliteManager import SqliteManager
 from dotenv import load_dotenv
 import os
@@ -101,10 +101,10 @@ def datos():
 
 if __name__ == "__main__":
     rs232 = rs232Comunication( stop_event=stop_event)
-    manager = Manager(stop_event=stop_event,rs232=rs232,mode=mode)
+    manager = TurnstileManager(stop_event=stop_event,rs232=rs232,mode=mode)
 
     database = SqliteManager(stop_event=stop_event,rs232=rs232) 
-    init_params = database.currentParameters()
+    init_params = database.get_current_parameters()
     if init_params != None:
         database.uuid = init_params[9]
         database.place = init_params[1]

@@ -30,9 +30,9 @@ else:
 doors = GpiosManager()
 def rotate_turnstile(direction: str):
     if direction == "left":
-        doors.unlock_left_arm()
+        doors.left_lock_open()
     elif direction == "right":
-        doors.unlock_right_arm()
+        doors.rigth_lock_open()
     else:
         logger.error("Invalid direction for rotation: %s", direction)
         return
@@ -48,14 +48,14 @@ def rotate_turnstile(direction: str):
             break
 
     if direction == "left":
-        doors.lock_left_arm()
+        doors.left_lock_close()
     elif direction == "right":
-        doors.lock_right_arm()
+        doors.rigth_lock_close()
 
 def release_tripod_arm():
-    doors.unlock_special_arm()
+    doors.special_door_open()
     time.sleep(1)
-    doors.lock_special_arm()
+    doors.special_door_close()
 
 class TurnstileManager(threading.Thread, GpiosManager):
     def __init__(self, rs232, stop_event, mode):
