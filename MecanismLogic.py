@@ -3,7 +3,7 @@ import time
 import threading
 import logging
 from dotenv import load_dotenv
-from audioManager import AudioManager
+
 
 # Setup Logging
 logging.basicConfig(
@@ -78,6 +78,8 @@ class TurnstileManager(threading.Thread, GpiosManager):
                     self._handle_special_pass()
                 elif self.rs232.validation:
                     self._handle_rs232_pass()
+                elif doors.read_pulsante():
+                    self._handle_direction_pass(self.mode)
             time.sleep(0.1)
 
     def _handle_direction_pass(self, direction):

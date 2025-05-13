@@ -3,7 +3,7 @@ import time
 
 # Configura el puerto y la velocidad
 PORT = "/dev/serial0"   # Cambia esto si usas otro UART
-BAUDRATE = 115200       # Ajusta según necesidad
+BAUDRATE = 9600       # Ajusta según necesidad
 
 try:
     # Inicializa el puerto serial

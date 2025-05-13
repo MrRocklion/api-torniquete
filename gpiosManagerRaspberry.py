@@ -100,5 +100,7 @@ class GpiosManager():
     
     def read_sensor(self):
         return self.sensor.value == 0
+    def read_pulsante(self):
+        return self.pulsante.value == 1
 
 
